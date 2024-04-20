@@ -1,7 +1,8 @@
 # Star Wars
 
-To run the project you need to:
-- install [nodejs](https://nodejs.org/en/download) (>= 18.13).
+## How to run the project ?
+
+- You need nodejs to run angular, install it from here: [nodejs](https://nodejs.org/en/download) (>= 18.13).
 - Git clone the [project](https://github.com/meksof/start-wars).
 - Then go to the project directory`cd start-wars` and run `npm install` to install the project dependencies.
 
@@ -26,15 +27,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## In the meantime !
 
  - Swapi.dev a des problèmes de certificat, j'ai dû changer de date sur mon PC pour bypasser ce problème.
- - J'ai rencontré un problème de CORS (Cross-Origin Request): le navigateur bloque les requêtes http depuis et vers un serveur (https://swapi.dev) dont l'url est différente du nom de domaine de mon serveur local (http://localhost).
+ - J'ai rencontré un problème de CORS (Cross-Origin Request): le navigateur bloque les requêtes http depuis et vers un serveur (https://swapi.dev) dont l'url est différente du nom de domaine de mon serveur local (http://localhost). Par contre, il s'est avéré qu'il s'agit d'un problème lié au problème de certificat chez swapi.dev.
 
 ## Reste à faire
  - [x] Rédiger dans README.md les étapes à suivre pour démarrer le projet.
  - [x] Présenter les informations d'une personne sur la page principale.
  - [ ] Ajouter les pages de détails d':
-    - [ ] un film
+    - [x] un film
     - [ ] une espèce
     - [ ] un véhicule
     - [ ] un vaisseau spatial
  - [x] Mettre en place les tests unitaires
  - [ ] Amélioration: Surligner le mot recherché dans la liste des résultats
+ - [ ] Amélioration: Améliorer l'esthétique de l'UI.

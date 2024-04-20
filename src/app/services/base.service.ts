@@ -6,15 +6,18 @@ import { SwapiResponse } from "./swapi-result";
 export class BaseService
 {
     private baseUrl = 'https://swapi.dev/api';
-    private httpClient = inject(HttpClient);
+    protected httpClient = inject(HttpClient);
+    protected url: string;
 
     constructor (
         protected endpoint: string
     )
-    {}
-
-    get<T> (extraUrl: string): Observable<SwapiResponse<T>>
     {
-        return this.httpClient.get<SwapiResponse<T>>(`${this.baseUrl}/${this.endpoint}/${extraUrl}`);
+        this.url = `${this.baseUrl}/${endpoint}`;
+    }
+
+    protected get<T> (extraUrl: string): Observable<SwapiResponse<T>>
+    {
+        return this.httpClient.get<SwapiResponse<T>>(`${this.url}/${extraUrl}`);
     }
 }

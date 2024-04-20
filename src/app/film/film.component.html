@@ -1,0 +1,61 @@
+@if ( film | async; as film )
+{
+    <sw-details-view [paths]="breadcrumbPaths">
+        <ng-container title>
+            {{film.title}}&nbsp;&nbsp;<span class="text-sm text-slate-400">#{{film.id}}</span>
+        </ng-container>
+        <ul class="py-2 px-5 list-disc list-inside text-slate-900">
+            <li>
+                <span class="text-slate-400">Directeur</span>&nbsp;
+                <span class="font-bold">{{ film.director }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Réalisateur</span>&nbsp;
+                <span class="font-bold">{{ film.producer }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Date de sortie</span>&nbsp;
+                <span class="font-bold">{{ film.release_date }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Opening crawl</span>
+                <span class="font-bold">{{ film.opening_crawl }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Les personnages</span>
+                <ul class="px-5 list-disc list-inside text-slate-900">
+                    @for (character of film.characters; track character) {<li>{{character}}</li>}
+                    @empty {<div class="text-slate-400">Il n'y a aucun personnage dans le film.</div>}
+                </ul>
+            </li>
+            <li>
+                <span class="text-slate-400">Les espèces</span>
+                <ul class="px-5 list-disc list-inside">
+                    @for (species of film.species; track species) {<li><a href="#">{{ species }}</a></li>}
+                    @empty {<div class="text-slate-400">Aucune espèce.</div>}
+                </ul>
+            </li>
+            <li>
+                <span class="text-slate-400">Les véhicules</span>
+                <ul class="px-5 list-disc list-inside">
+                    @for (vehicle of film.vehicles; track vehicle) {<li><a href="#">{{ vehicle }}</a></li>}
+                    @empty {<div class="text-slate-400">Aucun véhicule.</div>}
+                </ul>
+            </li>
+            <li>
+                <span class="text-slate-400">Les vaisseaux</span>
+                <ul class="px-5 list-disc list-inside">
+                    @for (starship of film.starships; track starship) {<li><a href="#">{{ starship }}</a></li>}
+                    @empty {<div class="text-slate-400">Aucun vaisseau.</div>}
+                </ul>
+            </li>
+        </ul>
+    </sw-details-view>
+}
+@else {
+    <sw-details-view [paths]="breadcrumbPaths">
+        <sw-empty-block>
+            Aucun film trouvé !
+        </sw-empty-block>
+    </sw-details-view>
+}

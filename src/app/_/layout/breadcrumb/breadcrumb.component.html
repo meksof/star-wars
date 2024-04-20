@@ -1,0 +1,12 @@
+<div class="breadcrumb mb-5">
+    @for (path of paths; track path.url;; let last = $last; let first = $first) {
+    @if (last)
+    {
+        /&nbsp;<span class="text-slate-400">{{path.label}}</span>
+    }
+    @else {
+        @if (!first) { / } &nbsp;<a class="text-blue-600" [routerLink]="path.url"
+            title="Aller vers la page {{path.label}}">{{path.label}}</a>&nbsp;
+        }
+    }
+</div>

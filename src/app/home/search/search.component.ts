@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Observable, Subject, catchError, concat, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { People } from '../models/domain/people';
-import { PeoplesService } from '../services/peoples.service';
+import { People } from '../../models/domain/people';
+import { PeopleService } from '../../services/peoples.service';
 
 @Component({
-    selector: 'app-search',
+    selector: 'sw-search',
     standalone: true,
     imports: [
         NgSelectModule,
@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit
     @Output() selected = new EventEmitter<People>()
 
     constructor (
-        private peoplesService: PeoplesService
+        private peopleService: PeopleService
     )
     { }
 
@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit
             this.searchTerm.pipe(
                 distinctUntilChanged(),
                 tap(() => this.peopleLoading = true),
-                switchMap(term => this.peoplesService.search(term).pipe(
+                switchMap(term => this.peopleService.search(term).pipe(
                     catchError(() => of([])), // empty list on error
                     tap(() => this.peopleLoading = false)
                 ))

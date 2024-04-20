@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { People } from '../models/domain/people';
-import { SwYearPipe } from '../pipes/sw-year.pipe';
+import { People } from '../../models/domain/people';
+import { SwYearPipe } from '../../pipes/sw-year.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-people',
+    selector: 'sw-people',
     standalone: true,
     templateUrl: './people.component.html',
     imports: [
-        SwYearPipe
+        SwYearPipe,
+        RouterLink
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

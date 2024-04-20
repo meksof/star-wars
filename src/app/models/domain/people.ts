@@ -1,8 +1,5 @@
 import { PeopleApi } from "../api/people";
-import { Film } from "../film";
-import { Species } from "../species";
-import { Starship } from "../starship";
-import { Vehicle } from "../vehicule";
+import { filmUI } from "./film";
 // Les élements suivants sont à afficher dans l'UI:
 // Le nom,
 // L'année de naissance,
@@ -17,7 +14,7 @@ export class People
 {
     birth_year!: string;
     eye_color!: string;
-    films!: string[] | Film[];
+    films!: string[];
     gender!: string;
     hair_color!: string;
     height!: string;
@@ -27,15 +24,18 @@ export class People
     skin_color!: string;
     created!: Date;
     edited!: Date;
-    species!: string[] | Species[];
-    starships!: string[] | Starship[];
+    species!: string[] ;
+    starships!: string[] ;
     url!: string;
-    vehicles!: string[] | Vehicle[];
+    vehicles!: string[] ;
+    filmsUI?: filmUI[]
 }
 
 export const mapPeopleFromApi = (source: PeopleApi): People =>
 {
     const target: People = Object.assign(new People(), source);
+
+    target.filmsUI = source.films.map(film => new filmUI(film))
 
     return target
 }

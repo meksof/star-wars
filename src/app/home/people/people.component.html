@@ -1,0 +1,48 @@
+<ul class="py-2 px-5 list-disc list-inside">
+    <li><span class="text-slate-400">Nom</span>&nbsp;<span class="font-bold">{{ people.name }}</span></li>
+    <li>
+        <span class="text-slate-400">Année de naissance</span>&nbsp;
+        <span class="font-bold">{{ people.birth_year | SWYear }}</span>
+    </li>
+    <li>
+        <span class="text-slate-400">Sexe</span>&nbsp;
+        <span class="font-bold">{{ people.gender }}</span>
+    </li>
+    <li>
+        <span class="text-slate-400">Taille</span>&nbsp;
+        <span class="font-bold">{{ people.height }}</span>
+    </li>
+    <li>
+        <span class="text-slate-400">Masse</span>&nbsp;
+        <span class="font-bold">{{ people.mass }}</span>
+    </li>
+    <li>
+        <span class="text-slate-400">Les films dans lesquels il est apparu</span>
+        <ul class="px-5 list-disc list-inside">
+            @for (film of people.filmsUI; track film) {<li><a class="text-blue-600" [routerLink]="['film', film.id]">{{
+                    film.url }}</a></li>}
+            @empty {<div class="text-slate-400">Il n'est apparu dans aucun film.</div>}
+        </ul>
+    </li>
+    <li>
+        <span class="text-slate-400">Les espèces</span>
+        <ul class="px-5 list-disc list-inside">
+            @for (species of people.species; track species) {<li><a href="#">{{ species }}</a></li>}
+            @empty {<div class="text-slate-400">Il n'appartient à aucune espèce.</div>}
+        </ul>
+    </li>
+    <li>
+        <span class="text-slate-400">Les véhicules</span>
+        <ul class="px-5 list-disc list-inside">
+            @for (vehicle of people.vehicles; track vehicle) {<li><a href="#">{{ vehicle }}</a></li>}
+            @empty {<div class="text-slate-400">Il n'a piloté aucun véhicule.</div>}
+        </ul>
+    </li>
+    <li>
+        <span class="text-slate-400">Les vaisseaux</span>
+        <ul class="px-5 list-disc list-inside">
+            @for (starship of people.starships; track starship) {<li><a href="#">{{ starship }}</a></li>}
+            @empty {<div class="text-slate-400">Il n'a piloté aucun vaisseau.</div>}
+        </ul>
+    </li>
+</ul>

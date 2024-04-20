@@ -1,0 +1,11 @@
+<div class="px-5 py-3">
+    @if (paths.length > 0){
+        <sw-breadcrumb [paths]="paths"></sw-breadcrumb>
+    }
+    <h1 class="text-5xl">
+        <ng-content select="[title]"></ng-content>
+    </h1>
+    <div class="mt-5">
+        <ng-content></ng-content>
+    </div>
+</div>

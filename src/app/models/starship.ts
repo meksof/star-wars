@@ -1,6 +1,3 @@
-import { Film } from "./film";
-import { People } from "./domain/people";
-
 export interface Starship {
     MGLT: string;
     cargo_capacity: string;
@@ -16,8 +13,8 @@ export interface Starship {
     model: string;
     name: string;
     passengers: string;
-    films: string[] | Film[];
-    pilots: string[] | People[];
+    films: string[] ;
+    pilots: string[] ;
     starship_class: string;
     url: string;
 }

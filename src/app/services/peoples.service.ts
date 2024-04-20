@@ -8,7 +8,7 @@ import { PeopleApi } from '../models/api/people';
 @Injectable({
     providedIn: 'root'
 })
-export class PeoplesService extends BaseService
+export class PeopleService extends BaseService
 {
     constructor ()
     {

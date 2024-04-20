@@ -1,6 +1,3 @@
-import { Film } from "./film";
-import { People } from "./domain/people";
-
 export interface Vehicle {
     cargo_capacity: string;
     consumables: string;
@@ -14,8 +11,8 @@ export interface Vehicle {
     model: string;
     name: string;
     passengers: string;
-    pilots: string[] | People[];
-    films: string[] | Film[];
+    pilots: string[] ;
+    films: string[] ;
     url: string;
     vehicle_class: string;
 }
