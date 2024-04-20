@@ -6,40 +6,38 @@ import { Observable, map, switchMap } from 'rxjs';
 import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { Path } from '../_/models/path';
 import { EmptyBlockComponent } from '../_/layout/empty-block/empty-block.component';
-import { SpeciesService } from '../_/services/species.service';
-import { Species } from '../_/models/domain/species';
+import { VehicleService } from '../_/services/vehicle.service';
+import { Vehicle } from '../_/models/domain/vehicle';
 import { HomeComponent } from '../home/home.component';
-import { MaybeUnknownPipe } from '../_/pipes/maybe-unknown.pipe';
 
 @Component({
-    selector: 'sw-species',
+    selector: 'sw-vehicle',
     standalone: true,
     imports: [
         DetailsViewComponent,
         EmptyBlockComponent,
-        AsyncPipe,
-        MaybeUnknownPipe
+        AsyncPipe
     ],
-    templateUrl: './species.component.html'
+    templateUrl: './vehicle.component.html'
 })
-export class SpeciesComponent implements OnInit
+export class VehicleComponent implements OnInit
 {
-    public species!: Observable<Species>;
-    private static path = new Path('Species', 'species/:id');
-    public breadcrumbPaths = [HomeComponent.path, SpeciesComponent.path];
+    public vehicle!: Observable<Vehicle>;
+    private static path = new Path('Vehicle', 'vehicle/:id');
+    public breadcrumbPaths = [HomeComponent.path, VehicleComponent.path];
 
     constructor (
         private activatedRoute: ActivatedRoute,
-        private speciesService: SpeciesService
+        private vehicleService: VehicleService
     )
     { }
 
     ngOnInit ()
     {
-        this.species = this.activatedRoute.paramMap.pipe(
+        this.vehicle = this.activatedRoute.paramMap.pipe(
             map(params => params.get('id') ?? ''),
             switchMap(id =>
-                this.speciesService.getOne(id)
+                this.vehicleService.getOne(id)
             )
         )
     }

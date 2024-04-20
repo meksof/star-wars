@@ -19,7 +19,7 @@
             </li>
             <li>
                 <span class="text-slate-400">Moyenne de la durée de vie</span>&nbsp;
-                <span class="font-bold">{{ species.average_lifespan }}</span>
+                <span class="font-bold">{{ species.average_lifespan | MaybeUnknown }}</span>
             </li>
             <li>
                 <span class="text-slate-400">Couleur des yeux</span>&nbsp;

@@ -23,7 +23,7 @@ export class SwYearPipe implements PipeTransform
             return `${year} Après la Bataille de Yavin`;
         }
 
-        return "inconnue";
+        return value;
     }
 
 }

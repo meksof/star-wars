@@ -2,7 +2,7 @@
     <li><span class="text-slate-400">Nom</span>&nbsp;<span class="font-bold">{{ people.name }}</span></li>
     <li>
         <span class="text-slate-400">Année de naissance</span>&nbsp;
-        <span class="font-bold">{{ people.birth_year | SWYear }}</span>
+        <span class="font-bold">{{ people.birth_year | SWYear | MaybeUnknown }}</span>
     </li>
     <li>
         <span class="text-slate-400">Sexe</span>&nbsp;
@@ -10,11 +10,11 @@
     </li>
     <li>
         <span class="text-slate-400">Taille</span>&nbsp;
-        <span class="font-bold">{{ people.height }}</span>
+        <span class="font-bold">{{ people.height | MaybeUnknown }}</span>
     </li>
     <li>
         <span class="text-slate-400">Masse</span>&nbsp;
-        <span class="font-bold">{{ people.mass }}</span>
+        <span class="font-bold">{{ people.mass | MaybeUnknown }}</span>
     </li>
     <li>
         <span class="text-slate-400">Les films dans lesquels il est apparu</span>
@@ -34,7 +34,7 @@
     <li>
         <span class="text-slate-400">Les véhicules</span>
         <ul class="px-5 list-disc list-inside">
-            @for (vehicle of people.vehicles; track vehicle) {<li><a href="#">{{ vehicle }}</a></li>}
+            @for (vehicle of people.vehiclesUI; track vehicle) {<li><a  class="text-blue-600" [routerLink]="['vehicle', vehicle.id]">{{ vehicle.url }}</a></li>}
             @empty {<div class="text-slate-400">Il n'a piloté aucun véhicule.</div>}
         </ul>
     </li>

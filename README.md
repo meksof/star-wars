@@ -35,8 +35,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
  - [ ] Ajouter les pages de détails d':
     - [x] un film
     - [x] une espèce
-    - [ ] un véhicule
+    - [x] un véhicule
     - [ ] un vaisseau spatial
  - [x] Mettre en place les tests unitaires
  - [ ] Amélioration: Surligner le mot recherché dans la liste des résultats
  - [ ] Amélioration: Améliorer l'esthétique de l'UI.
+ - [ ] Amélioration: [Vue personnage] Pour une meilleure expérience utilisateur, présenter les noms/titres des entités suivantes "film", "espèce", "véhicule", "vaisseau spatial" à la place d'un lien.
+   L'api swapi actuellement ne propose que des liens.
+   Peut-être proposer de faire un call api pour chaque ressource (film/1, film/5, ...) et présenter son nom, je pense que cette solution est un peu coûteuse en terme d'aller retour vers le serveur.

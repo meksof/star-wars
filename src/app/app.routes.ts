@@ -10,5 +10,8 @@ export const routes: Routes = [
     },
     {
         path: 'species/:id', loadComponent: () => import('./species/species.component').then(mod => mod.SpeciesComponent)
+    },
+    {
+        path: 'vehicle/:id', loadComponent: () => import('./vehicle/vehicle.component').then(mod => mod.VehicleComponent)
     }
 ];

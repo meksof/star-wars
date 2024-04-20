@@ -1,10 +1,10 @@
-export interface Vehicle {
+export interface VehicleApi {
     cargo_capacity: string;
     consumables: string;
     cost_in_credits: string;
-    created: Date;
+    created: string;
     crew: string;
-    edited: Date;
+    edited: string;
     length: string;
     manufacturer: string;
     max_atmosphering_speed: string;
