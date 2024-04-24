@@ -1,0 +1,27 @@
+<ul class="p-2 list-disc list-inside text-slate-900">
+    <li>Nom <span class="font-bold">{{ people.name }}</span></li>
+    <li>Année de naissance <span class="font-bold">{{ people.birth_year | SWYear }}</span></li>
+    <li>Sexe <span class="font-bold">{{ people.gender }}</span></li>
+    <li>Taille <span class="font-bold">{{ people.height }}</span></li>
+    <li>Masse <span class="font-bold">{{ people.mass }}</span></li>
+    <ul class="px-2 list-disc list-inside text-slate-900">
+        <div class="font-bold">Les films dans lesquels il est apparu</div>
+        @for (film of people.films; track film) {<li><a href="#">{{ film }}</a></li>}
+        @empty {<li>Il n'est apparu dans aucun film.</li>}
+    </ul>
+    <ul class="px-2 list-disc list-inside text-slate-900">
+        <div class="font-bold">Les espèces</div>
+        @for (species of people.species; track species) {<li><a href="#">{{ species }}</a></li>}
+        @empty {<li>Il n'appartient à aucune espèce.</li>}
+    </ul>
+    <ul class="px-2 list-disc list-inside text-slate-900">
+        <div class="font-bold">Les véhicules</div>
+        @for (vehicle of people.vehicles; track vehicle) {<li><a href="#">{{ vehicle }}</a></li>}
+        @empty {<li>Il n'a piloté aucun véhicule.</li>}
+    </ul>
+    <ul class="px-2 list-disc list-inside text-slate-900">
+        <div class="font-bold">Les vaisseaux</div>
+        @for (starship of people.starships; track starship) {<li><a href="#">{{ starship }}</a></li>}
+        @empty {<li>Il n'a piloté aucun vaisseau.</li>}
+    </ul>
+</ul>

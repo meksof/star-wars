@@ -1,0 +1,44 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "ignorePatterns": ["**/*.js"],
+    "rules": {
+        "no-trailing-spaces": "error",
+        "keyword-spacing": [
+            "error",
+            {
+                "after": true
+            }
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "always",
+                "named": "always",
+                "asyncArrow": "always"
+            }
+        ],
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "brace-style": [
+            "error",
+            "allman"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "@typescript-eslint/no-explicit-any": "error"
+    }
+}

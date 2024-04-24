@@ -1,0 +1,10 @@
+<ng-select [items]="peoples | async"
+           bindLabel="name"
+           [hideSelected]="true"
+           [trackByFn]="trackByFn"
+           [minTermLength]="2"
+           [loading]="peopleLoading"
+           [typeahead]="searchTerm"
+           [(ngModel)]="selectedPerson"
+           (change)="changed($event)">
+</ng-select>

@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { SearchComponent } from './search/search.component';
+import { PeopleComponent } from './people/people.component';
+import { People } from './models/domain/people';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    imports: [
+        SearchComponent,
+        PeopleComponent
+    ],
+    templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'star-wars';
+export class AppComponent
+{
+    public people: People | undefined = undefined;
+
+    selected (people: People): void
+    {
+        this.people = people;
+    }
 }
