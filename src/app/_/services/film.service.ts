@@ -3,7 +3,7 @@ import { Observable, map } from 'rxjs';
 
 import { BaseService } from './base.service';
 import { Film, mapFilmFromApi } from '../models/domain/film';
-import { FilmApi } from '../models/api/film';
+import { FilmApi } from '../models/api/film-api';
 
 @Injectable({
     providedIn: 'root'

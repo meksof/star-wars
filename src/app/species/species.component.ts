@@ -6,38 +6,38 @@ import { Observable, map, switchMap } from 'rxjs';
 import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { Path } from '../_/models/path';
 import { EmptyBlockComponent } from '../_/layout/empty-block/empty-block.component';
-import { FilmService } from '../_/services/film.service';
-import { Film } from '../_/models/domain/film';
+import { SpeciesService } from '../_/services/species.service';
+import { Species } from '../_/models/domain/species';
 import { HomeComponent } from '../home/home.component';
 
 @Component({
-    selector: 'sw-film',
+    selector: 'sw-species',
     standalone: true,
     imports: [
         DetailsViewComponent,
         EmptyBlockComponent,
         AsyncPipe
     ],
-    templateUrl: './film.component.html'
+    templateUrl: './species.component.html'
 })
-export class FilmComponent implements OnInit
+export class SpeciesComponent implements OnInit
 {
-    public film!: Observable<Film>;
-    private static path = new Path('Film', 'film/:id');
-    public breadcrumbPaths = [HomeComponent.path, FilmComponent.path];
+    public species!: Observable<Species>;
+    private static path = new Path('Species', 'species/:id');
+    public breadcrumbPaths = [HomeComponent.path, SpeciesComponent.path];
 
     constructor (
         private activatedRoute: ActivatedRoute,
-        private filmService: FilmService
+        private speciesService: SpeciesService
     )
     { }
 
     ngOnInit ()
     {
-        this.film = this.activatedRoute.paramMap.pipe(
+        this.species = this.activatedRoute.paramMap.pipe(
             map(params => params.get('id') ?? ''),
             switchMap(id =>
-                this.filmService.getOne(id)
+                this.speciesService.getOne(id)
             )
         )
     }

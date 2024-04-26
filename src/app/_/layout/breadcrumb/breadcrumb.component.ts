@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Path } from '../../shared/path';
+import { Path } from '../../models/path';
 
 @Component({
     selector: 'sw-breadcrumb',

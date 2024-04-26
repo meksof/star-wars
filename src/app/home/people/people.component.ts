@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { People } from '../../models/domain/people';
-import { SwYearPipe } from '../../pipes/sw-year.pipe';
+import { People } from '../../_/models/domain/people';
+import { SwYearPipe } from '../../_/pipes/sw-year.pipe';
 import { RouterLink } from '@angular/router';
 
 @Component({

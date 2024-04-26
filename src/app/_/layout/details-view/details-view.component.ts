@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Path } from '../../shared/path';
+import { Path } from '../../models/path';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
 @Component({

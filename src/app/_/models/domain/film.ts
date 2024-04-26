@@ -1,5 +1,5 @@
-import { extractId } from "../../_/shared/utils";
-import { FilmApi } from "../api/film";
+import { extractId } from "../../shared/utils";
+import { FilmApi } from "../api/film-api";
 
 export class Film
 {
@@ -29,7 +29,7 @@ export function mapFilmFromApi (source: FilmApi, id: string): Film
     return target;
 }
 
-export class filmUI
+export class FilmUI
 {
     public id: string;
 

@@ -34,7 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
  - [x] Présenter les informations d'une personne sur la page principale.
  - [ ] Ajouter les pages de détails d':
     - [x] un film
-    - [ ] une espèce
+    - [x] une espèce
     - [ ] un véhicule
     - [ ] un vaisseau spatial
  - [x] Mettre en place les tests unitaires

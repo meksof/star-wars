@@ -1,5 +1,6 @@
-import { PeopleApi } from "../api/people";
-import { filmUI } from "./film";
+import { PeopleApi } from "../api/people-api";
+import { FilmUI } from "./film";
+import { SpeciesUI } from "./species";
 // Les élements suivants sont à afficher dans l'UI:
 // Le nom,
 // L'année de naissance,
@@ -28,14 +29,16 @@ export class People
     starships!: string[] ;
     url!: string;
     vehicles!: string[] ;
-    filmsUI?: filmUI[]
+    filmsUI?: FilmUI[];
+    speciesUI?: SpeciesUI[];
 }
 
 export const mapPeopleFromApi = (source: PeopleApi): People =>
 {
     const target: People = Object.assign(new People(), source);
 
-    target.filmsUI = source.films.map(film => new filmUI(film))
+    target.filmsUI = source.films.map(film => new FilmUI(film))
+    target.speciesUI = source.species.map(species => new SpeciesUI(species))
 
     return target
 }

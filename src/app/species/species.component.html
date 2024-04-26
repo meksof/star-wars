@@ -1,0 +1,63 @@
+@if ( species | async; as species )
+{
+    <sw-details-view [paths]="breadcrumbPaths">
+        <ng-container title>
+            {{species.name}}&nbsp;&nbsp;<span class="text-sm text-slate-400">#{{species.id}}</span>
+        </ng-container>
+        <ul class="py-2 px-5 list-disc list-inside text-slate-900">
+            <li>
+                <span class="text-slate-400">Classification</span>&nbsp;
+                <span class="font-bold">{{ species.classification }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Designation</span>&nbsp;
+                <span class="font-bold">{{ species.designation }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Moyenne des tailles</span>&nbsp;
+                <span class="font-bold">{{ species.average_height }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Moyenne de la durée de vie</span>&nbsp;
+                <span class="font-bold">{{ species.average_lifespan }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Couleur des yeux</span>&nbsp;
+                <span class="font-bold">{{ species.eye_colors }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Couleur des cheveux</span>&nbsp;
+                <span class="font-bold">{{ species.hair_colors }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Language</span>&nbsp;
+                <span class="font-bold">{{ species.language }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Couleur de peau</span>&nbsp;
+                <span class="font-bold">{{ species.skin_colors }}</span>
+            </li>
+            <li>
+                <span class="text-slate-400">Les personnages</span>
+                <ul class="px-5 list-disc list-inside text-slate-900">
+                    @for (people of species.people; track people) {<li>{{ people }}</li>}
+                    @empty {<div class="text-slate-400">Il n'y a aucun personnage dans l'espèce.</div>}
+                </ul>
+            </li>
+            <li>
+                <span class="text-slate-400">Les films</span>
+                <ul class="px-5 list-disc list-inside">
+                    @for (film of species.films; track film) {<li>{{ film }}</li>}
+                    @empty {<div class="text-slate-400">Aucune film.</div>}
+                </ul>
+            </li>
+        </ul>
+    </sw-details-view>
+}
+@else {
+    <sw-details-view [paths]="breadcrumbPaths">
+        <sw-empty-block>
+            Aucune espèce trouvée !
+        </sw-empty-block>
+    </sw-details-view>
+}

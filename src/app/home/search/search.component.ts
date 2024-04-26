@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Observable, Subject, catchError, concat, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { People } from '../../models/domain/people';
-import { PeopleService } from '../../services/peoples.service';
+import { People } from '../../_/models/domain/people';
+import { PeopleService } from '../../_/services/peoples.service';
 
 @Component({
     selector: 'sw-search',

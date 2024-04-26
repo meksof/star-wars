@@ -1,10 +1,10 @@
-export interface Species {
+export interface SpeciesApi {
     average_height: string;
     average_lifespan: string;
     classification: string;
-    created: Date;
+    created: string;
     designation: string;
-    edited: Date;
+    edited: string;
     eye_colors: string;
     hair_colors: string;
     homeworld: string ;

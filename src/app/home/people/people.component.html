@@ -27,7 +27,7 @@
     <li>
         <span class="text-slate-400">Les espèces</span>
         <ul class="px-5 list-disc list-inside">
-            @for (species of people.species; track species) {<li><a href="#">{{ species }}</a></li>}
+            @for (species of people.speciesUI; track species) {<li><a class="text-blue-600" [routerLink]="['species', species.id]">{{ species.url }}</a></li>}
             @empty {<div class="text-slate-400">Il n'appartient à aucune espèce.</div>}
         </ul>
     </li>

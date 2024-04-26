@@ -3,7 +3,7 @@ import { Observable, concatAll, map, toArray } from 'rxjs';
 
 import { BaseService } from './base.service';
 import { People, mapPeopleFromApi } from '../models/domain/people';
-import { PeopleApi } from '../models/api/people';
+import { PeopleApi } from '../models/api/people-api';
 
 @Injectable({
     providedIn: 'root'

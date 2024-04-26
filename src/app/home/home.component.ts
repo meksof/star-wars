@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { People } from '../models/domain/people';
+import { People } from '../_/models/domain/people';
 import { PeopleComponent } from './people/people.component';
 import { SearchComponent } from './search/search.component';
-import { Path } from '../_/shared/path';
+import { Path } from '../_/models/path';
 
 @Component({
     selector: 'app-home',
