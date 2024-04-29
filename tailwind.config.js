@@ -4,7 +4,16 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'antonio': ["Antonio", 'sans-serif'],
+    },
+    extend: {
+      colors: {
+        black: "#080808",
+        white: "#F2F9FF",
+        muted: "#808080"
+      }
+    }
   },
   plugins: [],
 }

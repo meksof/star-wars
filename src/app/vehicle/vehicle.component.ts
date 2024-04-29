@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap, tap, finalize } from 'rxjs';
 
 import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { Path } from '../_/models/path';
@@ -9,6 +9,8 @@ import { EmptyBlockComponent } from '../_/layout/empty-block/empty-block.compone
 import { VehicleService } from '../_/services/vehicle.service';
 import { Vehicle } from '../_/models/domain/vehicle';
 import { HomeComponent } from '../home/home.component';
+import { MaybeUnknownPipe } from '../_/pipes/maybe-unknown.pipe';
+import { BreadcrumbComponent } from '../_/layout/breadcrumb/breadcrumb.component';
 
 @Component({
     selector: 'sw-vehicle',
@@ -16,15 +18,19 @@ import { HomeComponent } from '../home/home.component';
     imports: [
         DetailsViewComponent,
         EmptyBlockComponent,
-        AsyncPipe
+        BreadcrumbComponent,
+        RouterLink,
+        AsyncPipe,
+        MaybeUnknownPipe
     ],
     templateUrl: './vehicle.component.html'
 })
 export class VehicleComponent implements OnInit
 {
     public vehicle!: Observable<Vehicle>;
-    private static path = new Path('Vehicle', 'vehicle/:id');
+    public loading = true;
     public breadcrumbPaths = [HomeComponent.path, VehicleComponent.path];
+    private static path = new Path('Véhicule', 'vehicle/:id');
 
     constructor (
         private activatedRoute: ActivatedRoute,
@@ -35,10 +41,18 @@ export class VehicleComponent implements OnInit
     ngOnInit ()
     {
         this.vehicle = this.activatedRoute.paramMap.pipe(
+            tap(() =>
+            {
+                this.loading = true;
+            }),
             map(params => params.get('id') ?? ''),
             switchMap(id =>
                 this.vehicleService.getOne(id)
-            )
+            ),
+            finalize(() =>
+            {
+                this.loading = false;
+            })
         )
     }
 

@@ -1,3 +1,74 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-black font-antonio text-white;
+}
+
+.container-md {
+    max-width: 768px;
+}
+
+.link {
+    @apply font-bold text-xs;
+}
+
+.scrollable {
+    scrollbar-color: #444444 #FFFFFF;
+    scrollbar-width: thin;
+}
+
+/***********************
+ **     NG SELECT     **
+ ***********************/
+.ng-select .ng-select-container,
+.ng-select.ng-select-opened > .ng-select-container,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked,
+.ng-dropdown-panel {
+    @apply bg-black;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    @apply text-white;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    @apply font-bold text-white;
+
+}
+
+input::placeholder, textarea::placeholder {
+    @apply text-muted;
+}
+
+.ng-select input {
+    @apply text-white;
+}
+
+.ng-select .ng-select-container {
+    min-height: 60px;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: 60px;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+    top: 15px;
+    padding-left: 24px;
+}
+
+.ng-select .ng-select-container .ng-value-container {
+    padding-left: 24px;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 16px 24px;
+}
+
+.ng-select .ng-select-container {
+    border-radius: 0;
+}
+/***********************
+ **    END NG SELECT  **
+ ***********************/

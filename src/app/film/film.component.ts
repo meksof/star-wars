@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, finalize, map, switchMap, tap } from 'rxjs';
 
 import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { Path } from '../_/models/path';
@@ -9,6 +9,7 @@ import { EmptyBlockComponent } from '../_/layout/empty-block/empty-block.compone
 import { FilmService } from '../_/services/film.service';
 import { Film } from '../_/models/domain/film';
 import { HomeComponent } from '../home/home.component';
+import { BreadcrumbComponent } from '../_/layout/breadcrumb/breadcrumb.component';
 
 @Component({
     selector: 'sw-film',
@@ -16,6 +17,8 @@ import { HomeComponent } from '../home/home.component';
     imports: [
         DetailsViewComponent,
         EmptyBlockComponent,
+        BreadcrumbComponent,
+        RouterLink,
         AsyncPipe
     ],
     templateUrl: './film.component.html'
@@ -23,8 +26,9 @@ import { HomeComponent } from '../home/home.component';
 export class FilmComponent implements OnInit
 {
     public film!: Observable<Film>;
-    private static path = new Path('Film', 'film/:id');
+    public loading = true;
     public breadcrumbPaths = [HomeComponent.path, FilmComponent.path];
+    private static path = new Path('Film', 'film/:id');
 
     constructor (
         private activatedRoute: ActivatedRoute,
@@ -35,10 +39,18 @@ export class FilmComponent implements OnInit
     ngOnInit ()
     {
         this.film = this.activatedRoute.paramMap.pipe(
+            tap(() =>
+            {
+                this.loading = true;
+            }),
             map(params => params.get('id') ?? ''),
             switchMap(id =>
                 this.filmService.getOne(id)
-            )
+            ),
+            finalize(() =>
+            {
+                this.loading = false;
+            })
         )
     }
 

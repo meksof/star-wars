@@ -22,9 +22,9 @@ import { PeopleService } from '../../_/services/peoples.service';
 export class SearchComponent implements OnInit
 {
     public peoples!: Observable<People[]>;
-    public selectedPerson: People = {} as People;
+    public selectedPerson: People | undefined = undefined;
     public searchTerm: Subject<string> = new Subject();
-    public peopleLoading!: boolean;
+    public loading!: boolean;
     @Output() selected = new EventEmitter<People>()
 
     constructor (
@@ -38,10 +38,10 @@ export class SearchComponent implements OnInit
             of([]), // default items,
             this.searchTerm.pipe(
                 distinctUntilChanged(),
-                tap(() => this.peopleLoading = true),
+                tap(() => this.loading = true),
                 switchMap(term => this.peopleService.search(term).pipe(
                     catchError(() => of([])), // empty list on error
-                    tap(() => this.peopleLoading = false)
+                    tap(() => this.loading = false)
                 ))
             )
         )

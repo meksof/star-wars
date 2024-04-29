@@ -1,4 +1,7 @@
-<sw-search (selected)="selected($event)"></sw-search>
-@if(people) {
-    <sw-people [people]="people"></sw-people>
-}
+<div class="px-20 py-14">
+    <sw-breadcrumb [paths]="paths"></sw-breadcrumb>
+    <div class="container-md mx-auto">
+        <sw-search (selected)="selected($event)"></sw-search>
+        <sw-people [people]="people"></sw-people>
+    </div>
+</div>

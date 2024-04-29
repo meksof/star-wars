@@ -2,70 +2,68 @@
 {
     <sw-details-view [paths]="breadcrumbPaths">
         <ng-container title>
-            {{vehicle.name}}&nbsp;&nbsp;<span class="text-sm text-slate-400">#{{vehicle.id}}</span>
+            {{vehicle.name}}
         </ng-container>
-        <ul class="py-2 px-5 list-disc list-inside text-slate-900">
-            <li>
-                <span class="text-slate-400">capacité de chargement </span>&nbsp;
-                <span class="font-bold">{{ vehicle.cargo_capacity }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">consommables </span>&nbsp;
-                <span class="font-bold">{{ vehicle.consumables }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Crédit </span>&nbsp;
-                <span class="font-bold">{{ vehicle.cost_in_credits }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Équipage</span>&nbsp;
-                <span class="font-bold">{{ vehicle.crew }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Largeur du véhicule (en mètres)</span>&nbsp;
-                <span class="font-bold">{{ vehicle.length }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Constructeur</span>&nbsp;
-                <span class="font-bold">{{ vehicle.manufacturer }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Vitesse maximale en atmosphère</span>&nbsp;
-                <span class="font-bold">{{ vehicle.max_atmosphering_speed }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Modèle</span>&nbsp;
-                <span class="font-bold">{{ vehicle.model }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Passagers</span>&nbsp;
-                <span class="font-bold">{{ vehicle.passengers }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Classe du véhicule</span>&nbsp;
-                <span class="font-bold">{{ vehicle.vehicle_class }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Pilotes</span>
-                <ul class="px-5 list-disc list-inside text-slate-900">
-                    @for (pilot of vehicle.pilots; track pilot) {<li>{{pilot}}</li>}
-                    @empty {<div class="text-slate-400">Il n'y a aucun pilote pour ce vehicle.</div>}
-                </ul>
-            </li>
-            <li>
-                <span class="text-slate-400">Films</span>
-                <ul class="px-5 list-disc list-inside">
-                    @for (film of vehicle.films; track film) {<li>{{ film }}</li>}
-                    @empty {<div class="text-slate-400">Aucune film.</div>}
-                </ul>
-            </li>
-        </ul>
+            <div class="text-muted justify-self-end">capacité de chargement </div>
+            <div>{{ vehicle.cargo_capacity }}</div>
+
+            <div class="text-muted justify-self-end">consommables </div>
+            <div>{{ vehicle.consumables | MaybeUnknown }}</div>
+
+            <div class="text-muted justify-self-end">Crédit </div>
+            <div>{{ vehicle.cost_in_credits | MaybeUnknown }}</div>
+
+            <div class="text-muted justify-self-end">Équipage</div>
+            <div>{{ vehicle.crew }}</div>
+
+            <div class="text-muted justify-self-end">Largeur du véhicule (en mètres)</div>
+            <div>{{ vehicle.length | MaybeUnknown }}</div>
+
+            <div class="text-muted justify-self-end">Constructeur</div>
+            <div>{{ vehicle.manufacturer }}</div>
+
+            <div class="text-muted justify-self-end">Vitesse maximale en atmosphère</div>
+            <div>{{ vehicle.max_atmosphering_speed }}</div>
+
+            <div class="text-muted justify-self-end">Modèle</div>
+            <div>{{ vehicle.model }}</div>
+
+            <div class="text-muted justify-self-end">Passagers</div>
+            <div>{{ vehicle.passengers }}</div>
+
+            <div class="text-muted justify-self-end">Classe du véhicule</div>
+            <div>{{ vehicle.vehicle_class }}</div>
+
+            <div class="text-muted justify-self-end">Pilotes</div>
+            <ul>
+                @for (pilot of vehicle.pilots; track pilot) {<li><span class="text-xs">{{pilot}}</span></li>}
+                @empty {<div class="text-muted">Il n'y a aucun pilote pour ce vehicle.</div>}
+            </ul>
+
+            <div class="text-muted justify-self-end">Films</div>
+            <ul>
+                @for (film of vehicle.filmsUI; track film) {<li><a class="link" [routerLink]="['/film', film.id]">{{ film.url }}</a></li>}
+                @empty {<div class="text-muted">Aucune film.</div>}
+            </ul>
     </sw-details-view>
 }
 @else {
-    <sw-details-view [paths]="breadcrumbPaths">
-        <sw-empty-block>
-            Aucun véhicule trouvé !
-        </sw-empty-block>
-    </sw-details-view>
+    @if (loading)
+    {
+        <div class="px-20 py-14">
+            <sw-breadcrumb [paths]="breadcrumbPaths"></sw-breadcrumb>
+            <sw-empty-block>
+                Chargement...
+            </sw-empty-block>
+        </div>    
+    }
+    @else
+    {
+        <div class="px-20 py-14">
+            <sw-breadcrumb [paths]="breadcrumbPaths"></sw-breadcrumb>
+            <sw-empty-block>
+                Aucun véhicule trouvé !
+            </sw-empty-block>
+        </div>
+    }
 }

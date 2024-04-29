@@ -1,48 +1,59 @@
-<ul class="py-2 px-5 list-disc list-inside">
-    <li><span class="text-slate-400">Nom</span>&nbsp;<span class="font-bold">{{ people.name }}</span></li>
-    <li>
-        <span class="text-slate-400">Année de naissance</span>&nbsp;
-        <span class="font-bold">{{ people.birth_year | SWYear | MaybeUnknown }}</span>
-    </li>
-    <li>
-        <span class="text-slate-400">Sexe</span>&nbsp;
-        <span class="font-bold">{{ people.gender }}</span>
-    </li>
-    <li>
-        <span class="text-slate-400">Taille</span>&nbsp;
-        <span class="font-bold">{{ people.height | MaybeUnknown }}</span>
-    </li>
-    <li>
-        <span class="text-slate-400">Masse</span>&nbsp;
-        <span class="font-bold">{{ people.mass | MaybeUnknown }}</span>
-    </li>
-    <li>
-        <span class="text-slate-400">Les films dans lesquels il est apparu</span>
-        <ul class="px-5 list-disc list-inside">
-            @for (film of people.filmsUI; track film) {<li><a class="text-blue-600" [routerLink]="['film', film.id]">{{
-                    film.url }}</a></li>}
-            @empty {<div class="text-slate-400">Il n'est apparu dans aucun film.</div>}
-        </ul>
-    </li>
-    <li>
-        <span class="text-slate-400">Les espèces</span>
-        <ul class="px-5 list-disc list-inside">
-            @for (species of people.speciesUI; track species) {<li><a class="text-blue-600" [routerLink]="['species', species.id]">{{ species.url }}</a></li>}
-            @empty {<div class="text-slate-400">Il n'appartient à aucune espèce.</div>}
-        </ul>
-    </li>
-    <li>
-        <span class="text-slate-400">Les véhicules</span>
-        <ul class="px-5 list-disc list-inside">
-            @for (vehicle of people.vehiclesUI; track vehicle) {<li><a  class="text-blue-600" [routerLink]="['vehicle', vehicle.id]">{{ vehicle.url }}</a></li>}
-            @empty {<div class="text-slate-400">Il n'a piloté aucun véhicule.</div>}
-        </ul>
-    </li>
-    <li>
-        <span class="text-slate-400">Les vaisseaux</span>
-        <ul class="px-5 list-disc list-inside">
-            @for (starship of people.starships; track starship) {<li><a href="#">{{ starship }}</a></li>}
-            @empty {<div class="text-slate-400">Il n'a piloté aucun vaisseau.</div>}
-        </ul>
-    </li>
-</ul>
+@if (people)
+{
+    <div class="title pt-16">
+        <h2 class="text-5xl">{{ people.name }}</h2>
+    </div>
+    
+    <div class="details pt-8">
+        <div class="frame-top"></div>
+        <div class="details-container py-8 px-8">
+            <div class="scrollable overflow-y-auto">
+                <div class="grid grid-cols-2 gap-x-20 gap-y-6 h-[320px]">
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Sexe</div>
+                    <div>{{ people.gender }}</div>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Taille</div>
+                    <div>{{ people.height | MaybeUnknown }}</div>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Masse</div>
+                    <div>{{ people.mass | MaybeUnknown }}</div>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Année de naissance</div>
+                    <div>{{ people.birth_year | SWYear | MaybeUnknown }}</div>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Les films dans lesquels il est apparu</div>
+                    <ul>
+                        @for (film of people.filmsUI; track film) {<li><a class="link" [routerLink]="['film', film.id]">{{
+                                film.url }}</a></li>}
+                        @empty {<div class="text-muted">Il n'est apparu dans aucun film.</div>}
+                    </ul>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Les espèces</div>
+                    <ul>
+                        @for (species of people.speciesUI; track species) {<li><a class="link" [routerLink]="['species', species.id]">{{ species.url }}</a></li>}
+                        @empty {<div class="text-muted">Il n'appartient à aucune espèce.</div>}
+                    </ul>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Les véhicules</div>
+                    <ul>
+                        @for (vehicle of people.vehiclesUI; track vehicle) {<li><a class="link" [routerLink]="['vehicle', vehicle.id]">{{ vehicle.url }}</a></li>}
+                        @empty {<div class="text-muted">Il n'a piloté aucun véhicule.</div>}
+                    </ul>
+                    <!--  -->
+                    <div class="text-muted justify-self-end">Les vaisseaux</div>
+                    <ul>
+                        @for (starship of people.starships; track starship) {<li><span class="text-xs">{{ starship }}</span></li>}
+                        @empty {<div class="text-muted">Il n'a piloté aucun vaisseau.</div>}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="frame-bottom"></div>
+    </div>
+}
+@else {
+    <sw-empty-block>
+        Sélectionner un personnage dans la barre de recherche pour voir ses détails.
+    </sw-empty-block>
+}

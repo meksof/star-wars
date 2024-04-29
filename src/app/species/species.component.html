@@ -2,62 +2,62 @@
 {
     <sw-details-view [paths]="breadcrumbPaths">
         <ng-container title>
-            {{species.name}}&nbsp;&nbsp;<span class="text-sm text-slate-400">#{{species.id}}</span>
+            {{species.name}}
         </ng-container>
-        <ul class="py-2 px-5 list-disc list-inside text-slate-900">
-            <li>
-                <span class="text-slate-400">Classification</span>&nbsp;
-                <span class="font-bold">{{ species.classification }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Designation</span>&nbsp;
-                <span class="font-bold">{{ species.designation }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Moyenne des tailles</span>&nbsp;
-                <span class="font-bold">{{ species.average_height }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Moyenne de la durée de vie</span>&nbsp;
-                <span class="font-bold">{{ species.average_lifespan | MaybeUnknown }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Couleur des yeux</span>&nbsp;
-                <span class="font-bold">{{ species.eye_colors }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Couleur des cheveux</span>&nbsp;
-                <span class="font-bold">{{ species.hair_colors }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Language</span>&nbsp;
-                <span class="font-bold">{{ species.language }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Couleur de peau</span>&nbsp;
-                <span class="font-bold">{{ species.skin_colors }}</span>
-            </li>
-            <li>
-                <span class="text-slate-400">Les personnages</span>
-                <ul class="px-5 list-disc list-inside text-slate-900">
-                    @for (people of species.people; track people) {<li>{{ people }}</li>}
-                    @empty {<div class="text-slate-400">Il n'y a aucun personnage dans l'espèce.</div>}
-                </ul>
-            </li>
-            <li>
-                <span class="text-slate-400">Les films</span>
-                <ul class="px-5 list-disc list-inside">
-                    @for (film of species.films; track film) {<li>{{ film }}</li>}
-                    @empty {<div class="text-slate-400">Aucune film.</div>}
-                </ul>
-            </li>
+        <div class="text-muted justify-self-end">Classification</div>
+        <div>{{ species.classification }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Designation</div>
+        <div>{{ species.designation }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Moyenne des tailles</div>
+        <div>{{ species.average_height }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Moyenne de la durée de vie</div>
+        <div>{{ species.average_lifespan | MaybeUnknown }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Couleur des yeux</div>
+        <div>{{ species.eye_colors }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Couleur des cheveux</div>
+        <div>{{ species.hair_colors }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Language</div>
+        <div>{{ species.language }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Couleur de peau</div>
+        <div>{{ species.skin_colors }}</div>
+        <!--  -->
+        <div class="text-muted justify-self-end">Les personnages</div>
+        <ul>
+            @for (people of species.people; track people) {<li><span class="text-xs">{{ people }}</span></li>}
+            @empty {<div class="text-muted">Il n'y a aucun personnage dans l'espèce.</div>}
+        </ul>
+        <!--  -->
+        <div class="text-muted justify-self-end">Les films</div>
+        <ul>
+            @for (film of species.filmsUI; track film) {<li><a class="link" [routerLink]="['/film', film.id]">{{ film.url }}</a></li>}
+            @empty {<div class="text-muted">Aucune film.</div>}
         </ul>
     </sw-details-view>
 }
 @else {
-    <sw-details-view [paths]="breadcrumbPaths">
-        <sw-empty-block>
-            Aucune espèce trouvée !
-        </sw-empty-block>
-    </sw-details-view>
+    @if (loading)
+    {
+        <div class="px-20 py-14">
+            <sw-breadcrumb [paths]="breadcrumbPaths"></sw-breadcrumb>
+            <sw-empty-block>
+                Chargement...
+            </sw-empty-block>
+        </div>    
+    }
+    @else
+    {
+        <div class="px-20 py-14">
+            <sw-breadcrumb [paths]="breadcrumbPaths"></sw-breadcrumb>
+            <sw-empty-block>
+                Aucune espèce trouvée !
+            </sw-empty-block>
+        </div>
+    }
 }

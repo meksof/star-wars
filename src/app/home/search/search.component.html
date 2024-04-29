@@ -3,8 +3,11 @@
            [hideSelected]="true"
            [trackByFn]="trackByFn"
            [minTermLength]="2"
-           [loading]="peopleLoading"
+           [loading]="loading"
            [typeahead]="searchTerm"
+           [notFoundText]="'Je ne trouve aucun personnage'"
+           typeToSearchText="Entrer au moins 2 caractères"
            [(ngModel)]="selectedPerson"
+           placeholder="Yoda, Greedo, Zam, ..."
            (change)="changed($event)">
 </ng-select>

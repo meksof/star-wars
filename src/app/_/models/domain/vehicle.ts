@@ -1,5 +1,6 @@
 import { extractId } from "../../shared/utils";
 import { VehicleApi } from "../api/vehicle-api";
+import { FilmUI } from "./film";
 
 export class Vehicle
 {
@@ -20,6 +21,7 @@ export class Vehicle
     url!: string;
     vehicle_class!: string;
     id?: string;
+    filmsUI?: FilmUI[];
 }
 
 export function mapVehicleFromApi (source: VehicleApi, id: string): Vehicle
@@ -27,6 +29,7 @@ export function mapVehicleFromApi (source: VehicleApi, id: string): Vehicle
     const target = Object.assign(new Vehicle(), source);
 
     target.id = id;
+    target.filmsUI = source.films.map(film => new FilmUI(film));
 
     return target;
 }

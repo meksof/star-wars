@@ -1,6 +1,7 @@
 {
   "name": "star-wars",
   "version": "0.0.0",
+  "description": "Une application android qui permet aux utilisateurs de rechercher des personnages de Star Wars et de voir des détails à leur sujet.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
