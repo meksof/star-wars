@@ -22,12 +22,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
  - Imaginer l'apparence de l'application
  - Faire une recherche sur les librairies open sources, pour implémenter la fonctionnalité de recherche.
- - Choix des librairies de composants: Tailwind est une librairie qui propose des helpers css. Les classes css remplacent le besoin d'implémenter un code css.
+ - Choix des librairies de composants: [Tailwindcss](https://tailwindcss.com/) est une librairie qui propose des helpers css. Les classes css remplacent le besoin d'écrire du code css en dur. [Lire plus sur le sujet](https://tailwindcss.com/).
 
 ## In the meantime !
 
  - Swapi.dev a des problèmes de certificat, j'ai dû changer de date sur mon PC pour bypasser ce problème.
  - J'ai rencontré un problème de CORS (Cross-Origin Request): le navigateur bloque les requêtes http depuis et vers un serveur (https://swapi.dev) dont l'url est différente du nom de domaine de mon serveur local (http://localhost). Par contre, il s'est avéré qu'il s'agit d'un problème lié au problème de certificat chez swapi.dev.
+ - La personnalisation du composant `ng-select` était challengeante.
+ Je n'avais pas la main de changer directement sur le style du composant, puisque les éléments était encapsulés.
 
 ## Reste à faire
  - [x] Rédiger dans README.md les étapes à suivre pour démarrer le projet.
@@ -38,8 +40,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     - [x] un véhicule
     - [ ] un vaisseau spatial
  - [x] Mettre en place les tests unitaires
- - [ ] Amélioration: Surligner le mot recherché dans la liste des résultats
+ - [ ] Amélioration: Pour une meilleure expérience utilisateur, surligner le mot recherché dans la liste des résultats
  - [x] Amélioration: Améliorer l'esthétique de l'UI.
- - [ ] Amélioration: [Vue personnage] Pour une meilleure expérience utilisateur, présenter les noms/titres des entités suivantes "film", "espèce", "véhicule", "vaisseau spatial" à la place d'un lien.
-   L'api swapi actuellement ne propose que des liens.
-   Peut-être proposer de faire un call api pour chaque ressource (film/1, film/5, ...) et présenter son nom, je pense que cette solution est un peu coûteuse en terme d'aller retour vers le serveur.
+ - [ ] Amélioration: [Vue personnage] Pour une meilleure expérience utilisateur, présenter les noms/titres des entités suivantes "film", "espèce", "véhicule", "vaisseau spatial" à la place d'un lien.<br/>
+   L'api swapi actuellement ne propose que des liens.<br/>
+   Peut-être proposer de faire un call api pour chaque ressource (film/1, film/5, ...) et présenter son nom.<br/>
+   Je pense que cette solution est un peu coûteuse en terme de ressources réseaux et peut-être surcharger le serveur ou atteindre le "rate limit" des calls api.
