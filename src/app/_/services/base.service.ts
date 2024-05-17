@@ -1,23 +1,29 @@
-import { HttpClient } from "@angular/common/http";
 import { inject } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { SwapiResponse } from "./swapi-result";
+
+import { SwapiResponse } from "./swapi-response";
 
 export class BaseService
 {
-    private baseUrl = 'https://swapi.dev/api';
     protected httpClient = inject(HttpClient);
-    protected url: string;
+    protected baseUrl: string;
+    private apiUrl = 'https://swapi.dev/api';
 
     constructor (
         protected endpoint: string
     )
     {
-        this.url = `${this.baseUrl}/${endpoint}`;
+        this.baseUrl = `${this.apiUrl}/${endpoint}`;
     }
 
-    protected get<T> (extraUrl: string): Observable<SwapiResponse<T>>
+    protected getSwapi<T> (extraUrl: string): Observable<SwapiResponse<T>>
     {
-        return this.httpClient.get<SwapiResponse<T>>(`${this.url}/${extraUrl}`);
+        return this.httpClient.get<SwapiResponse<T>>(`${this.baseUrl}/${extraUrl}`);
+    }
+
+    protected get<T> (url: string): Observable<T>
+    {
+        return this.httpClient.get<T>(`${url}`);
     }
 }

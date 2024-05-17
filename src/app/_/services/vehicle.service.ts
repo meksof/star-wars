@@ -18,7 +18,7 @@ export class VehicleService extends BaseService
 
     getOne (id: string): Observable<Vehicle>
     {
-        return this.httpClient.get<VehicleApi>(`${this.url}/${id}`)
+        return this.get<VehicleApi>(`${this.baseUrl}/${id}`)
             .pipe(
                 map(vehicleApi => mapVehicleFromApi(vehicleApi, id))
             );

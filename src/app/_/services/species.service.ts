@@ -18,7 +18,7 @@ export class SpeciesService extends BaseService
 
     getOne (id: string): Observable<Species>
     {
-        return this.httpClient.get<SpeciesApi>(`${this.url}/${id}`)
+        return this.get<SpeciesApi>(`${this.baseUrl}/${id}`)
             .pipe(
                 map(speciesApi => mapSpeciesFromApi(speciesApi, id))
             );

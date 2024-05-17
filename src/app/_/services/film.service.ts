@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
-import { BaseService } from './base.service';
 import { Film, mapFilmFromApi } from '../models/domain/film';
 import { FilmApi } from '../models/api/film-api';
+import { BaseService } from './base.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class FilmService extends BaseService
 
     getOne (id: string): Observable<Film>
     {
-        return this.httpClient.get<FilmApi>(`${this.url}/${id}`)
+        return this.get<FilmApi>(`${this.baseUrl}/${id}`)
             .pipe(
                 map(filmApi => mapFilmFromApi(filmApi, id))
             );
