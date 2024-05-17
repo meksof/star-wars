@@ -1,11 +1,12 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Observable, Subject, catchError, concat, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
+import { Observable, Subject, catchError, concat, debounceTime, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { People } from '../../_/models/domain/people';
 import { PeopleService } from '../../_/services/peoples.service';
+import { PeopleStore } from '../../_/store/people-store';
 
 @Component({
     selector: 'sw-search',
@@ -22,21 +23,22 @@ import { PeopleService } from '../../_/services/peoples.service';
 export class SearchComponent implements OnInit
 {
     public peoples!: Observable<People[]>;
-    public selectedPerson: People | undefined = undefined;
+    public selectedPeople: People | undefined;
     public searchTerm: Subject<string> = new Subject();
     public loading!: boolean;
-    @Output() selected = new EventEmitter<People>()
+    private peopleStore = inject(PeopleStore)
 
     constructor (
         private peopleService: PeopleService
     )
-    { }
+    {}
 
     ngOnInit ()
     {
         this.peoples = concat(
             of([]), // default items,
             this.searchTerm.pipe(
+                debounceTime(900),
                 distinctUntilChanged(),
                 tap(() => this.loading = true),
                 switchMap(term => this.peopleService.search(term).pipe(
@@ -45,6 +47,8 @@ export class SearchComponent implements OnInit
                 ))
             )
         )
+
+        this.selectedPeople = this.peopleStore.selectedPeople()
     }
 
     trackByFn (people: People)
@@ -54,6 +58,6 @@ export class SearchComponent implements OnInit
 
     changed (people: People)
     {
-        this.selected.emit(people)
+        this.peopleStore.setPeople(people);
     }
 }

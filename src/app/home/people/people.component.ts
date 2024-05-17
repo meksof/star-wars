@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { People } from '../../_/models/domain/people';
 import { SwYearPipe } from '../../_/pipes/sw-year.pipe';
 import { MaybeUnknownPipe } from '../../_/pipes/maybe-unknown.pipe';
 import { EmptyBlockComponent } from '../../_/layout/empty-block/empty-block.component';
+import { PeopleStore } from '../../_/store/people-store';
 
 @Component({
     selector: 'sw-people',
@@ -21,5 +22,13 @@ import { EmptyBlockComponent } from '../../_/layout/empty-block/empty-block.comp
 })
 export class PeopleComponent
 {
-    @Input() people!: People | undefined;
+    people!: Signal<People | undefined>;
+    private peopleStore = inject(PeopleStore);
+
+    constructor ()
+    {
+        this.people = this.peopleStore.selectedPeople;
+    }
+
+
 }
