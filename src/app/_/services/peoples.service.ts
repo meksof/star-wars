@@ -17,7 +17,7 @@ export class PeopleService extends BaseService
 
     search (term: string): Observable<People[]>
     {
-        return this.get<PeopleApi>(`?search=${term}`)
+        return this.getSwapi<PeopleApi>(`?search=${term}`)
             .pipe(
                 map((response) => response.results),
                 concatAll(),
