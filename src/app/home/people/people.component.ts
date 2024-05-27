@@ -5,7 +5,7 @@ import { People } from '../../_/models/domain/people';
 import { SwYearPipe } from '../../_/pipes/sw-year.pipe';
 import { MaybeUnknownPipe } from '../../_/pipes/maybe-unknown.pipe';
 import { EmptyBlockComponent } from '../../_/layout/empty-block/empty-block.component';
-import { PeopleStore } from '../../_/store/people-store';
+import { GlobalStore } from '../../_/store/global-store';
 
 @Component({
     selector: 'sw-people',
@@ -23,11 +23,11 @@ import { PeopleStore } from '../../_/store/people-store';
 export class PeopleComponent
 {
     people!: Signal<People | undefined>;
-    private peopleStore = inject(PeopleStore);
+    private globalStore = inject(GlobalStore);
 
     constructor ()
     {
-        this.people = this.peopleStore.selectedPeople;
+        this.people = this.globalStore.selectedPeople;
     }
 
 

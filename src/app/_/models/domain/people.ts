@@ -24,8 +24,8 @@ export class People
     mass!: string;
     name!: string;
     skin_color!: string;
-    created!: Date;
-    edited!: Date;
+    created?: Date;
+    edited?: Date;
     species!: string[] ;
     starships!: string[] ;
     url!: string;
