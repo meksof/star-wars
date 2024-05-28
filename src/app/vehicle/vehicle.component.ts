@@ -47,7 +47,7 @@ export class VehicleComponent implements OnInit
             }),
             map(params => params.get('id') ?? ''),
             switchMap(id =>
-                this.vehicleService.getOne(id)
+                this.vehicleService.get(id)
             ),
             finalize(() =>
             {

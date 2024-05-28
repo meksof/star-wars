@@ -16,9 +16,9 @@ export class SpeciesService extends BaseService
         super('species');
     }
 
-    getOne (id: string): Observable<Species>
+    get (id: string): Observable<Species>
     {
-        return this.get<SpeciesApi>(`${this.baseUrl}/${id}`)
+        return this._get<SpeciesApi>(`${this.baseUrl}/${id}`)
             .pipe(
                 map(speciesApi => mapSpeciesFromApi(speciesApi, id))
             );

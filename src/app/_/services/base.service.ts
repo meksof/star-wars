@@ -22,7 +22,7 @@ export class BaseService
         return this.httpClient.get<SwapiResponse<T>>(`${this.baseUrl}/${extraUrl}`);
     }
 
-    protected get<T> (url: string): Observable<T>
+    protected _get<T> (url: string): Observable<T>
     {
         return this.httpClient.get<T>(`${url}`);
     }

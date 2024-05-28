@@ -45,7 +45,7 @@ export class FilmComponent implements OnInit
             }),
             map(params => params.get('id') ?? ''),
             switchMap(id =>
-                this.filmService.getOne(id)
+                this.filmService.get(id)
             ),
             finalize(() =>
             {

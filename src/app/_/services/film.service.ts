@@ -16,9 +16,9 @@ export class FilmService extends BaseService
         super('films');
     }
 
-    getOne (id: string): Observable<Film>
+    get (id: string): Observable<Film>
     {
-        return this.get<FilmApi>(`${this.baseUrl}/${id}`)
+        return this._get<FilmApi>(`${this.baseUrl}/${id}`)
             .pipe(
                 map(filmApi => mapFilmFromApi(filmApi, id))
             );

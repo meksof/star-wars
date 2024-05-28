@@ -47,7 +47,7 @@ export class SpeciesComponent implements OnInit
             }),
             map(params => params.get('id') ?? ''),
             switchMap(id =>
-                this.speciesService.getOne(id)
+                this.speciesService.get(id)
             ),
             finalize(() =>
             {
