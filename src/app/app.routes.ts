@@ -6,6 +6,9 @@ export const routes: Routes = [
         path: HomeComponent.path.url, component: HomeComponent,
     },
     {
+        path: 'people/:id', loadComponent: () => import('./people/people.component').then(mod => mod.PeopleComponent)
+    },
+    {
         path: 'film/:id', loadComponent: () => import('./film/film.component').then(mod => mod.FilmComponent)
     },
     {

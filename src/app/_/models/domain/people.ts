@@ -1,3 +1,4 @@
+import { extractId } from "../../shared/utils";
 import { PeopleApi } from "../api/people-api";
 import { FilmUI } from "./film";
 import { SpeciesUI } from "./species";
@@ -44,4 +45,16 @@ export const mapPeopleFromApi = (source: PeopleApi): People =>
     target.speciesUI = source.species.map(species => new SpeciesUI(species))
 
     return target
+}
+
+export class PeopleUI
+{
+    public id: string;
+
+    constructor (
+        public url: string
+    )
+    {
+        this.id = extractId(url);
+    }
 }

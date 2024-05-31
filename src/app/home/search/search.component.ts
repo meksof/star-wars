@@ -1,12 +1,14 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { Subject, tap } from 'rxjs';
 
 import { People } from '../../_/models/domain/people';
 import { PeopleStore } from '../people-store';
-import { GlobalStore } from '../../_/store/global-store';
+import { AppState, getSelectedPeople } from '../../_/store/root-store';
+import { SelectPeople } from '../../_/store/root.actions';
 
 @Component({
     selector: 'sw-search',
@@ -28,12 +30,18 @@ export class SearchComponent implements OnInit
     public searchTerm: Subject<string> = new Subject();
     public isLoading!: Signal<boolean>;
     private peopleStore = inject(PeopleStore);
-    private globalStore = inject(GlobalStore);
+    private store: Store<AppState> = inject(Store);
 
     ngOnInit ()
     {
         this.searchTerm.subscribe(term => this.peopleStore.setSearchTerm(term));
-        this.selectedPeople = this.globalStore.selectedPeople();
+        this.store.select(getSelectedPeople)
+            .pipe(
+                tap((people) =>
+                {
+                    this.selectedPeople = people;
+                })
+            ).subscribe();
         this.isLoading = this.peopleStore.isLoading;
         this.peoples = this.peopleStore.peoples;
     }
@@ -45,7 +53,7 @@ export class SearchComponent implements OnInit
 
     changed (people: People)
     {
-        this.globalStore.selectPeople(people);
+        this.store.dispatch(SelectPeople({ people }));
         this.peopleStore.setPeoples([])
     }
 }

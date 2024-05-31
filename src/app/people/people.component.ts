@@ -1,47 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
 import { Observable, filter, finalize, map, switchMap, tap } from 'rxjs';
 
-import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
-import { Path } from '../_/models/path';
-import { EmptyBlockComponent } from '../_/layout/empty-block/empty-block.component';
-import { SpeciesService } from '../_/services/species.service';
-import { Species } from '../_/models/domain/species';
+import { People } from '../_/models/domain/people';
 import { HomeComponent } from '../home/home.component';
+import { Path } from '../_/models/path';
+import { PeopleService } from '../_/services/peoples.service';
+import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { MaybeUnknownPipe } from '../_/pipes/maybe-unknown.pipe';
-import { BreadcrumbComponent } from '../_/layout/breadcrumb/breadcrumb.component';
+import { SwYearPipe } from '../_/pipes/sw-year.pipe';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'sw-species',
+    selector: 'app-people',
     standalone: true,
     imports: [
         DetailsViewComponent,
-        EmptyBlockComponent,
-        BreadcrumbComponent,
+        RouterLink,
         AsyncPipe,
         MaybeUnknownPipe,
-        RouterLink
+        SwYearPipe
     ],
-    templateUrl: './species.component.html'
+    templateUrl: './people.component.html'
 })
-export class SpeciesComponent implements OnInit
+export class PeopleComponent implements OnInit
 {
-    public species!: Observable<Species>;
+
+    public people!: Observable<People>;
     public loading = true;
-    public breadcrumbPaths = [HomeComponent.path, SpeciesComponent.path];
-    private static path = new Path('Species', 'species/:id');
+    public breadcrumbPaths = [HomeComponent.path, PeopleComponent.path];
+    private static path = new Path('People', 'people/:id');
 
     constructor (
         private activatedRoute: ActivatedRoute,
-        private speciesService: SpeciesService
+        private peopleService: PeopleService
     )
     { }
 
     ngOnInit ()
     {
         // TODO: refactor this to use a store instead
-        this.species = this.activatedRoute.paramMap.pipe(
+        this.people = this.activatedRoute.paramMap.pipe(
             tap(() =>
             {
                 this.loading = true;
@@ -49,7 +48,7 @@ export class SpeciesComponent implements OnInit
             map(params => params.get('id')),
             filter((id: string | null): id is string => id!== null),
             switchMap(id =>
-                this.speciesService.get(id)
+                this.peopleService.get(id)
             ),
             finalize(() =>
             {

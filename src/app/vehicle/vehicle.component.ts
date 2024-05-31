@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { Observable, map, switchMap, tap, finalize } from 'rxjs';
+import { Observable, map, switchMap, tap, finalize, filter } from 'rxjs';
 
 import { DetailsViewComponent } from '../_/layout/details-view/details-view.component';
 import { Path } from '../_/models/path';
@@ -40,12 +40,14 @@ export class VehicleComponent implements OnInit
 
     ngOnInit ()
     {
+        // TODO: refactor this to use a store instead
         this.vehicle = this.activatedRoute.paramMap.pipe(
             tap(() =>
             {
                 this.loading = true;
             }),
-            map(params => params.get('id') ?? ''),
+            map(params => params.get('id')),
+            filter((id: string | null): id is string => id!== null),
             switchMap(id =>
                 this.vehicleService.get(id)
             ),
