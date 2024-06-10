@@ -1,5 +1,6 @@
 import { extractId } from "../../shared/utils";
 import { FilmApi } from "../api/film-api";
+import { PeopleUI } from "./people";
 import { SpeciesUI } from "./species";
 import { VehicleUI } from "./vehicle";
 
@@ -22,6 +23,7 @@ export class Film
     id?: string;
     speciesUI?: SpeciesUI[];
     vehiclesUI?: VehicleUI[];
+    peoplesUI?: PeopleUI[];
 }
 
 export function mapFilmFromApi (source: FilmApi, id: string): Film
@@ -31,6 +33,7 @@ export function mapFilmFromApi (source: FilmApi, id: string): Film
     target.id = id;
     target.speciesUI = source.species.map(species => new SpeciesUI(species));
     target.vehiclesUI = source.vehicles.map(vehicle => new VehicleUI(vehicle));
+    target.peoplesUI = source.characters.map(people => new PeopleUI(people));
 
     return target;
 }

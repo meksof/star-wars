@@ -29,7 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
  - Swapi.dev a des problèmes de certificat, j'ai dû changer de date sur mon PC pour bypasser ce problème.
  - J'ai rencontré un problème de CORS (Cross-Origin Request): le navigateur bloque les requêtes http depuis et vers un serveur (https://swapi.dev) dont l'url est différente du nom de domaine de mon serveur local (http://localhost). Par contre, il s'est avéré qu'il s'agit d'un problème lié au problème de certificat chez swapi.dev.
  - La personnalisation du composant `ng-select` était challengeante.
- Je n'avais pas la main de changer directement sur le style du composant, puisque les éléments était encapsulés.
+   Je n'avais pas la main de changer directement sur le style du composant, puisque les éléments était encapsulés.
 
 ## Reste à faire
  - [x] Rédiger dans README.md les étapes à suivre pour démarrer le projet.
@@ -46,3 +46,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
    L'api swapi actuellement ne propose que des liens.<br/>
    Peut-être proposer de faire un call api pour chaque ressource (film/1, film/5, ...) et présenter son nom.<br/>
    Je pense que cette solution est un peu coûteuse en terme de ressources réseaux et peut-être surcharger le serveur ou atteindre le "rate limit" des calls api.
+ - [x] Amélioration: En tant qu'utilisateur final, au moment de sélectionner un personnage puis aller vers une autre page, je dois pouvoir retrouver mon personnage sélectionné une fois je navigue vers la page "recherche des personnages".<br/>
+   Ceci doit être le cas, si je navigue vers la page "film", puis je navigue vers la page "espèce" puis je retourne à la page "recherche des personnages".

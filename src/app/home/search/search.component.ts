@@ -1,11 +1,14 @@
+import { ChangeDetectionStrategy, Component, OnInit, Signal, inject } from '@angular/core';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Observable, Subject, catchError, concat, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { Subject, tap } from 'rxjs';
 
 import { People } from '../../_/models/domain/people';
-import { PeopleService } from '../../_/services/peoples.service';
+import { PeopleStore } from '../people-store';
+import { AppState, getSelectedPeople } from '../../_/store/root-store';
+import { SelectPeople } from '../../_/store/root.actions';
 
 @Component({
     selector: 'sw-search',
@@ -16,35 +19,31 @@ import { PeopleService } from '../../_/services/peoples.service';
         JsonPipe,
         FormsModule
     ],
+    providers: [PeopleStore],
     templateUrl: './search.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit
 {
-    public peoples!: Observable<People[]>;
-    public selectedPerson: People | undefined = undefined;
+    public peoples!: Signal<People[]>;
+    public selectedPeople: People | undefined;
     public searchTerm: Subject<string> = new Subject();
-    public loading!: boolean;
-    @Output() selected = new EventEmitter<People>()
-
-    constructor (
-        private peopleService: PeopleService
-    )
-    { }
+    public isLoading!: Signal<boolean>;
+    private peopleStore = inject(PeopleStore);
+    private store: Store<AppState> = inject(Store);
 
     ngOnInit ()
     {
-        this.peoples = concat(
-            of([]), // default items,
-            this.searchTerm.pipe(
-                distinctUntilChanged(),
-                tap(() => this.loading = true),
-                switchMap(term => this.peopleService.search(term).pipe(
-                    catchError(() => of([])), // empty list on error
-                    tap(() => this.loading = false)
-                ))
-            )
-        )
+        this.searchTerm.subscribe(term => this.peopleStore.setSearchTerm(term));
+        this.store.select(getSelectedPeople)
+            .pipe(
+                tap((people) =>
+                {
+                    this.selectedPeople = people;
+                })
+            ).subscribe();
+        this.isLoading = this.peopleStore.isLoading;
+        this.peoples = this.peopleStore.peoples;
     }
 
     trackByFn (people: People)
@@ -54,6 +53,7 @@ export class SearchComponent implements OnInit
 
     changed (people: People)
     {
-        this.selected.emit(people)
+        this.store.dispatch(SelectPeople({ people }));
+        this.peopleStore.setPeoples([])
     }
 }

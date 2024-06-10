@@ -18,7 +18,7 @@
     <!--  -->
     <div class="text-muted justify-self-end">Les personnages</div>
     <ul>
-        @for (character of film.characters; track character) {<li><span class="text-xs">{{character}}</span></li>}
+        @for (people of film.peoplesUI; track people) {<li><a class="link" [routerLink]="['/people', people.id]">{{people.url}}</a></li>}
         @empty {<div class="text-muted">Il n'y a aucun personnage dans le film.</div>}
     </ul>
     <!--  -->

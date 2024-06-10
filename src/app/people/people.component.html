@@ -1,0 +1,47 @@
+@if (people | async; as people)
+{
+<sw-details-view [paths]="breadcrumbPaths">
+  <ng-container title>
+    {{people.name}}
+  </ng-container>
+  <!--  -->
+  <div class="text-muted justify-self-end">Sexe</div>
+  <div>{{ people.gender }}</div>
+  <!--  -->
+  <div class="text-muted justify-self-end">Taille</div>
+  <div>{{ people.height | MaybeUnknown }}</div>
+  <!--  -->
+  <div class="text-muted justify-self-end">Masse</div>
+  <div>{{ people.mass | MaybeUnknown }}</div>
+  <!--  -->
+  <div class="text-muted justify-self-end">Année de naissance</div>
+  <div>{{ people.birth_year | SWYear | MaybeUnknown }}</div>
+  <!--  -->
+  <div class="text-muted justify-self-end">Les films dans lesquels il est apparu</div>
+  <ul>
+    @for (film of people.filmsUI; track film) {<li><a class="link" [routerLink]="['/film', film.id]">{{
+        film.url }}</a></li>}
+    @empty {<div class="text-muted">Il n'est apparu dans aucun film.</div>}
+  </ul>
+  <!--  -->
+  <div class="text-muted justify-self-end">Les espèces</div>
+  <ul>
+    @for (species of people.speciesUI; track species) {<li><a class="link" [routerLink]="['/species', species.id]">{{
+        species.url }}</a></li>}
+    @empty {<div class="text-muted">Il n'appartient à aucune espèce.</div>}
+  </ul>
+  <!--  -->
+  <div class="text-muted justify-self-end">Les véhicules</div>
+  <ul>
+    @for (vehicle of people.vehiclesUI; track vehicle) {<li><a class="link" [routerLink]="['/vehicle', vehicle.id]">{{
+        vehicle.url }}</a></li>}
+    @empty {<div class="text-muted">Il n'a piloté aucun véhicule.</div>}
+  </ul>
+  <!--  -->
+  <div class="text-muted justify-self-end">Les vaisseaux</div>
+  <ul>
+    @for (starship of people.starships; track starship) {<li><span class="text-xs">{{ starship }}</span></li>}
+    @empty {<div class="text-muted">Il n'a piloté aucun vaisseau.</div>}
+  </ul>
+</sw-details-view>
+}

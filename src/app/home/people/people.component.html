@@ -1,4 +1,4 @@
-@if (people)
+@if (people | async; as people)
 {
     <div class="title pt-16">
         <h2 class="text-5xl">{{ people.name }}</h2>

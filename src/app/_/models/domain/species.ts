@@ -1,6 +1,7 @@
 import { extractId } from "../../shared/utils";
 import { SpeciesApi } from "../api/species-api";
 import { FilmUI } from "./film";
+import { PeopleUI } from "./people";
 
 export class Species
 {
@@ -21,6 +22,7 @@ export class Species
     url!: string;
     id?: string;
     filmsUI?: FilmUI[];
+    peoplesUI?: PeopleUI[];
 }
 
 export function mapSpeciesFromApi (source: SpeciesApi, id: string): Species
@@ -29,6 +31,7 @@ export function mapSpeciesFromApi (source: SpeciesApi, id: string): Species
 
     target.id = id;
     target.filmsUI = source.films.map(film => new FilmUI(film));
+    target.peoplesUI = source.people.map(people => new PeopleUI(people));
 
     return target;
 }

@@ -30,7 +30,7 @@
         <!--  -->
         <div class="text-muted justify-self-end">Les personnages</div>
         <ul>
-            @for (people of species.people; track people) {<li><span class="text-xs">{{ people }}</span></li>}
+            @for (people of species.peoplesUI; track people) {<li><a class="link" [routerLink]="['/people', people.id]">{{people.url}}</a></li>}
             @empty {<div class="text-muted">Il n'y a aucun personnage dans l'espèce.</div>}
         </ul>
         <!--  -->

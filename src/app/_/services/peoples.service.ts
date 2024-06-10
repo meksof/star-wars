@@ -26,4 +26,12 @@ export class PeopleService extends BaseService
             );
     }
 
+    get (id: string): Observable<People>
+    {
+        return this._get<PeopleApi>(`${this.baseUrl}/${id}`)
+            .pipe(
+                map(peopleApi => mapPeopleFromApi(peopleApi))
+            );
+    }
+
 }
